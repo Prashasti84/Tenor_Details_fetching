@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tenor GIF Channel Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Tenor Tracking Dashboard</p>
+        <h1>Track any Tenor channel in seconds</h1>
+        <p class="subtitle">
+          Paste a Tenor channel URL or username to explore every GIF, share count, and media link.
+        </p>
+        <form id="channel-form">
+          <label for="channel-input">Channel URL or @username</label>
+          <div class="input-row">
+            <input id="channel-input" type="text" placeholder="https://tenor.com/@google" />
+            <button type="submit">Fetch GIFs</button>
+          </div>
+          <p class="helper">Example: https://tenor.com/users/duckracegp or @google</p>
+        </form>
+        <div id="viewer-banner" class="viewer-banner hidden">
+          <p>
+            Viewing shared dashboard for <span id="viewer-channel"></span>. To view another channel, use the
+            button below.
+          </p>
+          <button type="button" id="reset-view" class="ghost small">Switch channel</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="status-panel" class="panel hidden">
+        <div class="panel__header">
+          <h2>Channel Overview</h2>
+          <span id="timestamp"></span>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <p>Total GIFs</p>
+            <h3 id="total-gifs">0</h3>
+          </div>
+          <div class="stat-card">
+            <p>Total Shares</p>
+            <h3 id="total-shares">0</h3>
+          </div>
+          <div class="stat-card">
+            <p>Total Stickers</p>
+            <h3 id="total-stickers">0</h3>
+          </div>
+          <div class="stat-card">
+            <p>Sticker Shares</p>
+            <h3 id="total-sticker-shares">0</h3>
+          </div>
+        </div>
+        <div id="share-row" class="share-row hidden">
+          <div>
+            <p class="share-title">Share this dashboard</p>
+            <p class="share-desc">Send this unique link to your client so they can see real-time stats.</p>
+          </div>
+          <div class="share-actions">
+            <input id="share-input" type="text" readonly />
+            <button type="button" id="copy-link" class="ghost">Copy link</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel library-panel">
+        <div class="panel__header library-header">
+          <div class="view-switch">
+            <button type="button" class="toggle active" data-view="gif">GIF Library</button>
+            <button type="button" class="toggle" data-view="sticker">Sticker Library</button>
+          </div>
+        </div>
+        <div class="filters-bar">
+          <div class="filters active" id="gif-filters">
+            <input id="search-gifs" type="text" placeholder="Filter by title or tag..." />
+            <select id="sort-order">
+              <option value="shares-desc">Shares: High → Low</option>
+              <option value="shares-asc">Shares: Low → High</option>
+            </select>
+          </div>
+          <div class="filters" id="sticker-filters">
+            <input id="search-stickers" type="text" placeholder="Filter by title or tag..." />
+            <select id="sort-stickers">
+              <option value="shares-desc">Shares: High → Low</option>
+              <option value="shares-asc">Shares: Low → High</option>
+            </select>
+          </div>
+        </div>
+        <p id="library-hint" class="library-hint">Showing channel GIFs. Use the filters to refine results.</p>
+        <div id="library-empty" class="library-empty hidden">
+          <h4 id="library-empty-heading">No results yet</h4>
+          <p id="library-empty-copy">Try adjusting your filters or switch libraries to see more assets.</p>
+        </div>
+        <div id="results-section" class="library-grids">
+          <div id="results-grid" class="grid"></div>
+          <div id="stickers-section" class="grid hidden"></div>
+        </div>
+      </section>
+
+      <section id="empty-state" class="empty">
+        <div>
+          <h3>No channel selected yet</h3>
+          <p>Enter any Tenor URL or username above to populate the dashboard.</p>
+        </div>
+      </section>
+    </main>
+
+    <template id="gif-card-template">
+      <article class="gif-card">
+        <img src="" alt="" loading="lazy" />
+        <div class="gif-card__body">
+          <h4></h4>
+          <p class="meta"></p>
+          <div class="tags"></div>
+          <div class="tag-rank-section">
+            <button type="button" class="tag-rank-btn ghost small">View tag ranks</button>
+            <div class="tag-rank-list"></div>
+          </div>
+          <div class="gif-card__footer">
+            <span class="shares"></span>
+            <a class="link" href="#" target="_blank" rel="noopener noreferrer">Open GIF</a>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
+

@@ -1,0 +1,23 @@
+{
+  "name": "tenor_tracking-dashboard",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "fetch": "node fetch_tenor_channel_gifs.js"
+  },
+  "keywords": [
+    "tenor",
+    "dashboard",
+    "gifs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "Dashboard experience for exploring Tenor channel GIFs and share counts",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}
